@@ -22,10 +22,10 @@ def calculate_gear_ratio(schematic):
         return int(number)
 
     # Iterate over each element in the array
-    for i in range(len(schematic)):
-        for j in range(len(schematic[i])):
+    for i, row in enumerate(schematic):
+        for j, cell in enumerate(row):
             # When an asterisk (*) is found
-            if schematic[i][j] == '*':
+            if cell == '*':
                 numbers = []
                 # Check all adjacent cells for digits, including diagonals
                 for di in range(-1, 2):
@@ -33,7 +33,7 @@ def calculate_gear_ratio(schematic):
                         if di == 0 and dj == 0:  # Skip the current cell
                             continue
                         ni, nj = i + di, j + dj
-                        if 0 <= ni < len(schematic) and 0 <= nj < len(schematic[i]) and schematic[ni][nj].isdigit():
+                        if 0 <= ni < len(schematic) and 0 <= nj < len(row) and schematic[ni][nj].isdigit():
                             # Form the full number and add it to the numbers list
                             number = form_number(ni, nj)
                             if number not in numbers:
